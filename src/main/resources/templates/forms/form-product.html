@@ -1,0 +1,7 @@
+
+<html  xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="~{layout}">
+   <div layout:fragment="content">
+	   <th:block th:include="~{/fragments/fragment-product :: header(${#strings.capitalize('__#{new-product}__')})}"></th:block>
+	   <th:block th:include="~{/fragments/fragment-product :: form}"></th:block>
+   </div>
+</html>

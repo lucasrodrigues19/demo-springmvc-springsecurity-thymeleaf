@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="~{layout}">
+   <div layout:fragment="content">
+		<th:block th:include="~{/fragments/fragment-product :: header(${#strings.capitalize('__#{my-products}__')})}"></th:block>
+		<th:block th:include="~{/fragments/fragment-product :: nav}"></th:block>
+		<th:block th:include="~{/fragments/fragment-product :: list (${listProduct})}"></th:block>
+   </div>
+</html>

@@ -1,0 +1,37 @@
+Using H2
+	https://www.baeldung.com/spring-boot-h2-database
+
+Double x BigDecimal
+	https://www.devmedia.com.br/java-bigdecimal-trabalhando-com-mais-precisao/30286
+	
+MVC:
+	redirect x Forward 
+
+Redirect: 
+		 Redirecionamento client-side. Devolve uma resposta HTTP para pedir uma nova requisição para a URL.
+		 
+Forward:
+		 Enquanto o redirecionamento client-side causa uma nova requisição, o server-side continua dentro da mesma requisição HTTP.	
+OBS:
+   trabalhando com uma requisição POST, seguindo a regra: "always redirect after post".	
+	
+Validações formulario produto
+Por que usar DTO ao cadastrar produtos:
+	O problema é que expomos o nosso modelo e qualquer mudança nele causaria uma mudança no HTML.
+	
+	O problema é que abrimos espaço para receber mais dados da requisição do que foi previsto. 
+	Como a classe Pedido têm mais atributos (o valor e a data),
+	 podemos enviar esses dados também (ao manipular os dados da requisição).
+
+Usando validação no produto:
+	Como estou usando um DTO, e quero representar esses dados para o usuario, vou validar para que todos eles
+	estejam preenchidos.
+	
+BeanValidation	
+	BindingResult, uso para verificar se houve erros na validação do objeto com as notações do javax.validation.
+	
+	Ex:
+		public String save(Model model,@Valid ProductDTO productDTO,BindingResult result)
+		
+Erros view, bootstrap: https://getbootstrap.com/docs/5.1/forms/validation/
+

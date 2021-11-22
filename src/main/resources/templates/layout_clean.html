@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br"  xmlns:th="http://www.thymeleaf.org"    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	<head>
+		<meta charset="UTF-8">
+		<meta content="width=device-width, initial-scale=1" name="viewport" />
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		<link rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.1/css/bootstrap.min.css}">
+		<!-- Fonts -->
+		<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Syncopate&display=swap" rel="stylesheet">
+		<!-- Css de para cada pagina especifica -->
+		<th:block layout:fragment="css"></th:block>
+		<style>
+			.body-nav{
+				background-color: #9AC0CD;
+			}
+			.background-white{
+				background-color: #FFF !important;
+			}
+			.font-roboto{
+				font-family: 'Roboto', sans-serif;
+			}
+			.font-caveat{
+				font-family: 'Caveat', cursive;
+			}
+			.font-syncopate{
+			font-family: 'Syncopate', sans-serif;
+			}
+			.color-white{
+			  color: white !important;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Conteudo de cada pagina especifica -->
+		<div layout:fragment="content"></div>
+		<!-- Script js de cada pagina especifica -->
+		<th:block layout:fragment="js"></th:block>
+	</body>
+</html>

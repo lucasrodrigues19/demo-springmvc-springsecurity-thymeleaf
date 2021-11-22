@@ -1,0 +1,129 @@
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+	
+  <th:block th:fragment="header(text)">
+		<div class="bg-light p-5 rounded">
+			<h1 class="display-4" th:text="${text}">Meus Produtos</h1>
+  		</div>
+   </th:block>	
+   
+   <th:block th:fragment="nav">	
+ 		<div class="divider"></div>
+		<nav class="navbar navbar-expand navbar-light mb-2">
+		  <div class="container-fluid">
+		    <div class="collapse navbar-collapse" id="navbarNav" th:with="productStatus=${T(com.lucasrodrigues.demo.thymeleaf.enums.ProductStatus)}">
+		      <ul class="navbar-nav">
+		        <li class="nav-item">
+		          <a th:text="${#strings.capitalize('__#{all}__')}" th:classappend="${status} == null ? 'active'" class="nav-link" aria-current="page" th:href="@{/home}">Todos</a>
+		        </li>
+		         <li class="nav-item">
+		          <a th:text="${#strings.capitalize('__#{wanted}__')}" th:classappend="${status} == ${productStatus.WANTED}  ? 'active'" class="nav-link"  th:href="@{'/home/status/'+${productStatus.WANTED.name().toLowerCase()}}">Desejados</a>
+		        </li>
+		        <li class="nav-item">
+		          <a th:text="${#strings.capitalize('__#{waiting-approval}__')}" th:classappend="${status} == ${productStatus.WAITING_APPROVAL} ? 'active'"  class="nav-link"  th:href="@{'/home/status/'+${productStatus.WAITING_APPROVAL.name().toLowerCase()}}">Aguardando aprovação</a>
+		        </li>
+		        <li class="nav-item">
+		          <a th:text="${#strings.capitalize('__#{purchased}__')}"class="nav-link" th:classappend="${status} == ${productStatus.PURCHASED} ? 'active'"  th:href="@{'/home/status/'+${productStatus.PURCHASED.name().toLowerCase()}}">Comprados</a>
+		        </li>
+		      </ul>
+		    </div>
+		     <a th:href="@{/products/create}"><button th:text="${#strings.capitalize('__#{new}__')}" class="btn btn-outline-secondary" >Novo</button></a>
+		  </div>
+		</nav>
+	</th:block>
+	
+	<th:block th:fragment="list(listProducts)" th:assert="${!#lists.isEmpty(listProducts)}">
+		 <div th:each="product,inter : ${listProducts}" class="card mb-3">	
+		 <th:block th:switch="${product.status.name()}">
+		 	<div th:case="${T(com.lucasrodrigues.demo.thymeleaf.enums.ProductStatus).WANTED.name()}" class="card-header alert-dark"><label th:text="${product.name}">Nome do produto</label></div>
+		 	<div th:case="${T(com.lucasrodrigues.demo.thymeleaf.enums.ProductStatus).PURCHASED.name()}" class="card-header alert-success"><label th:text="${product.name}">Nome do produto</label></div>
+		 	<div th:case="${T(com.lucasrodrigues.demo.thymeleaf.enums.ProductStatus).WAITING_APPROVAL.name()}"class="alert-warning card-header"><label th:text="${product.name}">Nome do produto</label></div>
+		 </th:block>	
+		 	<div class="card-body">
+		 		<div class="row">
+					<div class="col-12 col-sm-4">
+						<label>Valor:</label>
+						<span th:if="${product.value}" th:text="${'R$ ' + #numbers.formatDecimal(product.value,3,'POINT',2,'COMMA')}"></span>
+					</div>
+					<div class="col-12 col-sm-4">
+						<label>Data de entrega:</label>
+						<span th:if="${product.deliveryDate}" th:text="${#temporals.format(product.deliveryDate, 'dd/MM/yyyy')}"></span>
+					</div>
+				</div>
+				<div class="row">
+					 <div class="col-12 col-sm-8 mb-3">
+						<label>Producto</label>
+						<input class="form-control" th:value="${product.urlProduct}"/>
+						<label th:text="#{description}">Descrição</label>
+						<div>
+							<textarea class="form-control" th:text="${product.description}">Descrição do pedido</textarea>
+						</div>
+					</div>
+					<div class="col-12 col-sm-4">
+						<div>
+							<img class="img-thumbnail" th:src="${product.urlImage}" />
+						</div>
+					</div>	
+				</div>
+			</div>
+			<div class="card-footer">
+			</div>
+		</div>
+	</th:block>
+	<th:block th:fragment="form" th:if="${product}">
+		 <div class="card mt-3">
+		 	<div class="card-body ">
+				<form th:object="${productDTO}" class="row p-3 needs-validation" novalidate  method="post" th:action="@{/products/save}">
+					<div class="form-group mb-3 row">
+					  <div class="col-12 col-sm-6">
+						  <label for="name" class="form-label" th:text="#{name}"></label>
+						  <input th:field="*{name}" th:errorclass="is-invalid" type="text" class="form-control" required>
+						  <div class="invalid-feedback" th:errors="*{name}"></div>
+					  </div>
+					  <div class="col-12 col-sm-6">
+					  	   <label for="name" class="form-label" th:text="#{delivery-date}"></label>
+						  <input th:field="*{deliveryDate}" th:errorclass="is-invalid" type="text" class="form-control" required>
+						  <div class="invalid-feedback" th:errors="*{deliveryDate}"></div>
+					  </div>
+					</div>
+					
+					<div class="form-group mb-3 row">
+						<div class="col-12 col-sm-6">
+						  <label for="value" class="form-label" th:text="#{value}"></label>
+						  <input th:field="*{value}" th:errorclass="is-invalid" type="number"  min="0" class="form-control">
+						  <div class="invalid-feedback" th:errors="*{value}"></div>
+					 	</div>
+					 	<div class="col-12 col-sm-6">
+					 	 <label for="value" class="form-label" th:text="#{status}"></label>
+						  <select class="form-select" th:field="*{status}" aria-label="Default select example">
+							  <option th:selected="*{status} == ${T(com.lucasrodrigues.demo.thymeleaf.enums.ProductStatus).WANTED}" th:value="${T(com.lucasrodrigues.demo.thymeleaf.enums.ProductStatus).WANTED.name()}" th:text="${#strings.capitalize('__#{${T(com.lucasrodrigues.demo.thymeleaf.enums.ProductStatus).WANTED.name()}}__')}"></option>
+							  <option th:selected="*{status} == ${T(com.lucasrodrigues.demo.thymeleaf.enums.ProductStatus).WAITING_APPROVAL}" th:value="${T(com.lucasrodrigues.demo.thymeleaf.enums.ProductStatus).WAITING_APPROVAL.name()}" th:text="${#strings.capitalize('__#{${T(com.lucasrodrigues.demo.thymeleaf.enums.ProductStatus).WAITING_APPROVAL.name()}}__')}"></option>
+							  <option th:selected="*{status} == #{T(com.lucasrodrigues.demo.thymeleaf.enums.ProductStatus).PURCHASED}" th:value="${T(com.lucasrodrigues.demo.thymeleaf.enums.ProductStatus).PURCHASED.name()}" th:text="${#strings.capitalize('__#{${T(com.lucasrodrigues.demo.thymeleaf.enums.ProductStatus).PURCHASED.name()}}__')}"></option>
+						  </select>
+						</div>
+					</div>
+					
+					<div class="form-group mb-3">
+					  <label for="urlImage" class="form-label">Url imagem</label>
+					  <input th:field="*{urlImage}" th:errorclass="is-invalid" type="text" class="form-control">
+					   <div class="invalid-feedback" th:errors="*{urlImage}"></div>
+					</div>
+					
+					<div class="form-group mb-3">
+					  <label for="urlProduct" class="form-label">Url produto</label>
+					  <input th:field="*{urlProduct}" th:errorclass="is-invalid" type="text" class="form-control">
+					  <div class="invalid-feedback" th:errors="*{urlProduct}"></div>
+					</div>
+					
+					<div class="form-group mb-3">
+					  <label for="description" class="form-label" th:text="#{description}">Example textarea</label>
+					  <textarea th:field="*{description}" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+					</div>
+					
+					<div class="col-12">
+				   		 <button type="submit" class="btn btn-secondary" th:text="#{save}"></button>
+				  	</div>
+			  	</form>
+		  	</div>
+		  </div>	
+	</th:block>
+</html>
