@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="~{layout_clean}">
+   <div layout:fragment="content">
+      <div class="container">
+   		<div style="height: 100vh" class="justify-content-center align-items-center d-flex">
+	   		<div style="width: 400px;" class="card shadow-lg">
+	   			<div class="card-body align-items-center">
+	   			<h1 class="text-center font-syncopate" th:text="${#strings.capitalize('__#{login}__')}">Please Log In</h1>
+				<div th:if="${param.error}" th:text="#{'login.description.error'}" class="text-danger">
+				</div>
+				<div th:if="${param.logout}" th:text="#{'login.description.logout'}" class="text-success">
+				</div>
+				<form th:action="@{/login}" class="font-roboto" method="post">
+					<div class="form-group mb-3">
+						<input type="text" class="form-control fw-bold" name="username" th:placeholder="#{'user'}"/>
+					</div>
+					<div class="form-group mb-3">
+						<input type="password" class="form-control fw-bold" name="password" th:placeholder="#{'password'}"/>
+					</div>
+					<div class="form-group justify-content-center d-flex">
+						<input class="btn btn-secondary fw-bold" type="submit" th:value="#{'send'}" />
+					</div>
+				</form>
+	   			</div>
+	   		</div>
+		</div>
+		</div>
+   </div>
+</html>

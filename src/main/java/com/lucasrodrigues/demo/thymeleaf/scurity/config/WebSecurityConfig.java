@@ -17,15 +17,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
+		.antMatchers("/resources/**", "/static/**","/webjars/**").permitAll()
 		.anyRequest().authenticated()
-		.and()
-		.httpBasic();
+		.and().formLogin(form -> form.loginPage("/login").permitAll());
+		
 	}
 	
 	
 	
 	/**
-	 * Usar apenas para testes, não recomendado usar este 
+	 * Usar apenas para testes, não recomendado usar este metodo em prd
 	 */
 	@Bean
 	@Override

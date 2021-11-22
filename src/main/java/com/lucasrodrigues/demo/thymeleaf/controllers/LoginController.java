@@ -5,17 +5,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/error")
-public class ErrorServletController{
-   
+@RequestMapping("/login")
+public class LoginController {
+
 	
-	@GetMapping("/404")
-	public String error404() {
-		return "/error/404";
-	}
-	
-	@GetMapping("/403")
-	public String error403() {
-		return "/error/404";
+	@GetMapping
+	public String login() {
+		return "login";
 	}
 }
