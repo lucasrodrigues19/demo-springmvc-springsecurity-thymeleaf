@@ -12,7 +12,9 @@
 			  	</div>
 			  	<div class="col-6">
 			  		<div class="d-flex justify-content-end">
-						<a class="btn text-uppercase fw-bold"><span class="fw-1">Login</span></a>
+						<a sec:authorize="!isAuthenticated()" th:href="@{/login}" class="btn text-uppercase fw-bold"><span class="fw-1">Login</span></a>
+						<a sec:authorize="isAuthenticated()" href="#" onclick="document.querySelector('#form-logout').submit()" class="btn text-uppercase fw-bold"><span class="fw-1">Logout</span></a>
+						<form th:action="@{/logout}" method="post" id="form-logout"></form>
 					</div>
 			  	</div>
 			  </div>

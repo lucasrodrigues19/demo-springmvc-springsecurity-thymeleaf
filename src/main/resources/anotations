@@ -35,3 +35,14 @@ BeanValidation
 		
 Erros view, bootstrap: https://getbootstrap.com/docs/5.1/forms/validation/
 
+
+SEGURANÇA:
+	começando com spring security:
+		https://spring.io/guides/gs/securing-web/
+	form login spring secutiry:
+		https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/form.html
+	habilitando recursos do webjars:
+		https://stackoverflow.com/questions/53612202/bootstrap-not-working-when-using-spring-security
+	recursos extras, thymeleaf com spring:
+		https://github.com/thymeleaf/thymeleafexamples-springsecurity/blob/3.0-master/pom.xml
+
