@@ -1,7 +1,5 @@
 package com.lucasrodrigues.demo.thymeleaf.domains;
 
-import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -13,7 +11,7 @@ import javax.persistence.UniqueConstraint;
 
 @Entity
 @Table(name="authorities",uniqueConstraints = {@UniqueConstraint(columnNames = {"username","authority"})})
-public class Authorities implements Serializable {
+public class Authorities extends MainEntity{
 
 	
 	private static final long serialVersionUID = 1L;

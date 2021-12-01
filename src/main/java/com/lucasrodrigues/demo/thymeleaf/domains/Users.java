@@ -1,18 +1,27 @@
 package com.lucasrodrigues.demo.thymeleaf.domains;
 
-import java.io.Serializable;
-import java.util.UUID;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "users")
-public class Users implements Serializable {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class Users extends MainEntity {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -25,4 +34,7 @@ public class Users implements Serializable {
 	
 	@Column(name = "enabled",  nullable = false)
 	private boolean enabled;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.LAZY)
+	private List<Product> listProducts = new ArrayList<>();
 }
