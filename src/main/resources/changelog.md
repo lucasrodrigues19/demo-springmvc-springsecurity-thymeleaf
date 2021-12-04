@@ -1,3 +1,6 @@
+# 04/12/2021 Lucas Rodrigues [1.5.3]
+##ADDED working pageable
+
 # 04/12/2021 Lucas Rodrigues [1.4.3]
 ##FIXED 
 controlling user, adjusting navigation routes, ajusting default logout url

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -13,8 +14,6 @@ import com.lucasrodrigues.demo.thymeleaf.domains.Product;
 import com.lucasrodrigues.demo.thymeleaf.domains.Users;
 import com.lucasrodrigues.demo.thymeleaf.enums.ProductStatus;
 import com.lucasrodrigues.demo.thymeleaf.repository.ProductRepository;
-
-import lombok.AllArgsConstructor;
 
 @Service("productService")
 public class ProductService {
@@ -57,8 +56,8 @@ public class ProductService {
 		return repository.findByStatusAndUserId(productSatus,userId);
 	}
 	
-	public List<Product> findByStatus(ProductStatus productSatus) {
-		return repository.findByStatus(productSatus);
+	public List<Product> findByStatus(ProductStatus productSatus, Pageable pageable) {
+		return repository.findByStatus(productSatus,pageable);
 	}
 	
 	public Users findByUserById(String userId) {

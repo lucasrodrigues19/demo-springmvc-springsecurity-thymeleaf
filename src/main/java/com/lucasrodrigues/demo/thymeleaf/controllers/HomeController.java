@@ -5,7 +5,10 @@ import java.security.Principal;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.context.MessageSource;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,7 +34,10 @@ public class HomeController {
 	
 	@GetMapping
 	public String home(Model model, HttpServletRequest request, Principal principal) {
-		model.addAttribute("listProduct", productService.findByStatus(ProductStatus.DELIVERED));
+		
+		PageRequest pageable = PageRequest.of(0, 2, Sort.by("deliveryDate").descending());
+		
+		model.addAttribute("listProduct", productService.findByStatus(ProductStatus.DELIVERED,pageable));
 		model.addAttribute("status",ProductStatus.DELIVERED);
 		return "home";
 

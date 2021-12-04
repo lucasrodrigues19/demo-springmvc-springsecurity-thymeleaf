@@ -3,6 +3,7 @@ package com.lucasrodrigues.demo.thymeleaf.repository;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.lucasrodrigues.demo.thymeleaf.domains.Product;
@@ -12,7 +13,7 @@ public interface ProductRepository extends JpaRepository<Product, UUID>{
 
 	List<Product> findByStatusAndUserId(ProductStatus productSatus, String userId);
 	
-	List<Product> findByStatus(ProductStatus productSatus);
+	List<Product> findByStatus(ProductStatus productSatus, Pageable pageable);
 	
 	List<Product> findByUserId(String userId);
 
