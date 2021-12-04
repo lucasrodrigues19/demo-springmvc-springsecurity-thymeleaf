@@ -1,4 +1,4 @@
-package com.lucasrodrigues.demo.thymeleaf;
+package com.lucasrodrigues.demo.thymeleaf.repository;
 
 import java.util.List;
 import java.util.UUID;
@@ -10,6 +10,8 @@ import com.lucasrodrigues.demo.thymeleaf.enums.ProductStatus;
 
 public interface ProductRepository extends JpaRepository<Product, UUID>{
 
-	List<Product> findByStatus(ProductStatus productSatus);
+	List<Product> findByStatusAndUserId(ProductStatus productSatus, String userId);
+	
+	List<Product> findByUserId(String userId);
 
 }

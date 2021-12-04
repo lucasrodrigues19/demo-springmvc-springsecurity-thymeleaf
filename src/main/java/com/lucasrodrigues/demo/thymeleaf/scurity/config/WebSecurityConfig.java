@@ -22,14 +22,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private DataSource dataSource;
 	
+	@Autowired
+	private EncoderConfig encoder;
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 		.antMatchers("/resources/**", "/static/**","/webjars/**","/h2-console/**").permitAll()
 		.anyRequest().authenticated()
 		.and()
-		.formLogin(form -> form.loginPage("/login").permitAll())
-		.logout(logout -> logout.logoutUrl("/logout"));
+		.formLogin(form -> form.loginPage("/login").defaultSuccessUrl("/home", true).permitAll())
+		.logout(logout -> logout.logoutUrl("/logout"))
+		;
 		
 		  http.csrf().disable();
 	        http.headers().frameOptions().disable();
@@ -39,7 +43,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		//password authentication encript
-		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		
 		//para ultilizar o user, precisa criar uma tabela padrão do spring security para o user
 		UserDetails user =
@@ -50,7 +53,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 					.build();
 		auth.jdbcAuthentication()
 		.dataSource(dataSource)
-		.passwordEncoder(encoder)
+		//authentication default schema error when using PostgreSQL, default schema is not suitable for PostgreSQ 
+		//.usersByUsernameQuery("select username,password, enabled from users where username=?")
+		//.authoritiesByUsernameQuery("select username, role from tbauthorities where username=?")
+		//
+		.passwordEncoder(encoder.encoder())
 		.withUser(user);
 	}
 	
@@ -60,16 +67,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 * Usar apenas para testes, não recomendado usar este metodo em prd
 	 * salva o usuario em memoria
 	 */
-	@Bean
-	@Override
-	public UserDetailsService userDetailsService() {
-		UserDetails user =
-			 User.withDefaultPasswordEncoder()
-				.username("system")
-				.password("123")
-				.roles("ADMIN")
-				.build();
-
-		return new InMemoryUserDetailsManager(user);
-	}
+//	@Bean
+//	@Override
+//	public UserDetailsService userDetailsService() {
+//		UserDetails user =
+//			 User.withDefaultPasswordEncoder()
+//				.username("system")
+//				.password("123")
+//				.roles("ADMIN")
+//				.build();
+//
+//		return new InMemoryUserDetailsManager(user);
+//	}
 }

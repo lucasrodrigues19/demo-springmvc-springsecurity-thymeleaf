@@ -1,10 +1,10 @@
 package com.lucasrodrigues.demo.thymeleaf.domains;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -33,7 +33,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Entity
 @Table(name = "tb_product")
-public class Product extends MainEntity {
+public class Product implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
@@ -65,11 +65,11 @@ public class Product extends MainEntity {
 	private ProductStatus status;
 	
 	
-	@Column(name = "userid", insertable = false, updatable = false)
+	@Column(name = "userid", insertable = false, updatable = false,length = 255)
 	private String userId;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "userid",referencedColumnName = "username",nullable = false, foreignKey = @ForeignKey(name = "fk_userxproducts"))
-	private Users user;
+	private Users users;
 	
 }

@@ -1,5 +1,7 @@
 package com.lucasrodrigues.demo.thymeleaf.controllers;
 
+import java.security.Principal;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,16 +30,16 @@ public class HomeController {
 	
 	
 	@GetMapping
-	public String home(Model model, HttpServletRequest request) {
-		model.addAttribute("listProduct", productService.findAll());
+	public String home(Model model, HttpServletRequest request, Principal principal) {
+		model.addAttribute("listProduct", productService.findByUserId(principal.getName()));
 		return "home";
 	}
 	
 
 	@GetMapping("/status/{status}")
-	public String findByStatus(@PathVariable("status")String status, Model model, HttpServletRequest request) {
+	public String findByStatus(@PathVariable("status")String status, Model model, HttpServletRequest request,Principal principal) {
 		ProductStatus productSatus = ProductStatus.valueOf(status.toUpperCase());
-		model.addAttribute("listProduct", productService.findByStatus(productSatus));
+		model.addAttribute("listProduct", productService.findByStatus(productSatus,principal.getName()));
 		model.addAttribute("status",productSatus);
 		return "home";
 	}

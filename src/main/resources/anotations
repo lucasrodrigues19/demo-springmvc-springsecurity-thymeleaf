@@ -1,3 +1,11 @@
+
+ESTUDAR SOBRE:
+	CRSF
+
+JPA
+	Insertable diz se é possível inserir novos registros na tabela.
+	Updateable diz se é possível atualizar os registros na tabela.
+
 Using H2
 	https://www.baeldung.com/spring-boot-h2-database
 
@@ -45,4 +53,5 @@ SEGURANÇA:
 		https://stackoverflow.com/questions/53612202/bootstrap-not-working-when-using-spring-security
 	recursos extras, thymeleaf com spring:
 		https://github.com/thymeleaf/thymeleafexamples-springsecurity/blob/3.0-master/pom.xml
-
+	url padrão depois da autenticação:
+		https://www.baeldung.com/spring_redirect_after_login
