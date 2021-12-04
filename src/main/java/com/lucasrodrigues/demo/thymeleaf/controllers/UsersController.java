@@ -5,36 +5,37 @@ import java.security.Principal;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.MessageSource;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
-import com.lucasrodrigues.demo.thymeleaf.dto.ProductDTO;
 import com.lucasrodrigues.demo.thymeleaf.enums.ProductStatus;
 import com.lucasrodrigues.demo.thymeleaf.service.ProductService;
+import com.lucasrodrigues.demo.thymeleaf.service.UsersService;
 
 import lombok.AllArgsConstructor;
 
 @Controller
+@RequestMapping("/user")
 @AllArgsConstructor(onConstructor = @__(@Autowired))
-@RequestMapping("/home")
-public class HomeController {
+public class UsersController {
 
-	private final ProductService productService;
+	private final UsersService usersService;
 	
-	
-	@GetMapping
+	@GetMapping("/products")
 	public String home(Model model, HttpServletRequest request, Principal principal) {
-		model.addAttribute("listProduct", productService.findByStatus(ProductStatus.DELIVERED));
-		model.addAttribute("status",ProductStatus.DELIVERED);
-		return "home";
-
+		model.addAttribute("listProduct", usersService.getProductByUserId(principal.getName()));
+		return "/homes/home-user";
 	}
 	
+
+	@GetMapping("products/status/{status}")
+	public String findByStatus(@PathVariable("status")String status, Model model, HttpServletRequest request,Principal principal) {
+		ProductStatus productSatus = ProductStatus.valueOf(status.toUpperCase());
+		model.addAttribute("listProduct", usersService.getProductByStatusAndUserId(productSatus,principal.getName()));
+		model.addAttribute("status",productSatus);
+		return "/homes/home-user";
+	}
 }

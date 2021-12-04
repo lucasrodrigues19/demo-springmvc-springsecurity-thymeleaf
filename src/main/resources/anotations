@@ -55,3 +55,12 @@ SEGURANÇA:
 		https://github.com/thymeleaf/thymeleafexamples-springsecurity/blob/3.0-master/pom.xml
 	url padrão depois da autenticação:
 		https://www.baeldung.com/spring_redirect_after_login
+		
+ERROS		
+@AllArgsConstructor(onConstructor = @__(@Autowired))
+UsersService
+	ProductService
+ProductService
+	UsersService		
+	https://stackoverflow.com/questions/40695893/spring-security-circular-bean-dependency
+

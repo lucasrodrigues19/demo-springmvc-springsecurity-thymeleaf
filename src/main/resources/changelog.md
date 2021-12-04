@@ -1,3 +1,7 @@
+# 04/12/2021 Lucas Rodrigues [1.4.3]
+##FIXED 
+controlling user, adjusting navigation routes, ajusting default logout url
+
 # 04/12/2021 Lucas Rodrigues [1.4.2]
 ##ADDED 
 	- defaultSuccessUrl authentication

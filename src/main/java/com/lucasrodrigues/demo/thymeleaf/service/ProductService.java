@@ -16,13 +16,14 @@ import com.lucasrodrigues.demo.thymeleaf.repository.ProductRepository;
 
 import lombok.AllArgsConstructor;
 
-@Service
-@AllArgsConstructor(onConstructor = @__(@Autowired))
+@Service("productService")
 public class ProductService {
 
-	private final ProductRepository repository;
+	@Autowired
+	private  ProductRepository repository;
 	
-	private final UsersService	usersService;
+	@Autowired
+	private  UsersService usersService;
 	
 	public List<Product> findAll(){
 		return repository.findAll();
@@ -52,8 +53,12 @@ public class ProductService {
 		repository.save(entity);
 	}
 
-	public List<Product> findByStatus(ProductStatus productSatus, String userId) {
+	public List<Product> findByStatusAndUserId(ProductStatus productSatus, String userId) {
 		return repository.findByStatusAndUserId(productSatus,userId);
+	}
+	
+	public List<Product> findByStatus(ProductStatus productSatus) {
+		return repository.findByStatus(productSatus);
 	}
 	
 	public Users findByUserById(String userId) {

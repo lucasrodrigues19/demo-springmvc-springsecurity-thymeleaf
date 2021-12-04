@@ -4,5 +4,6 @@ public enum ProductStatus {
 	
 	WAITING_APPROVAL,
 	WANTED,
-	PURCHASED;
+	PURCHASED,
+	DELIVERED;
 }

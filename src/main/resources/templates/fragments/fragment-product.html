@@ -1,38 +1,41 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
 	
   <th:block th:fragment="header(text)">
-		<div class="bg-light p-5 rounded">
+		<div class="bg-light p-5 rounded mb-3">
 			<h1 class="display-4" th:text="${text}">Meus Produtos</h1>
   		</div>
    </th:block>	
    
    <th:block th:fragment="nav">	
  		<div class="divider"></div>
-		<nav class="navbar navbar-expand navbar-light mb-2">
+		<nav sec:authorize="isAuthenticated()" class="navbar navbar-expand navbar-light mb-2">
 		  <div class="container-fluid">
-		  <div class="row w-100">
-			   	<div class="col-12 col-sm-10">
-				    <div class="collapse navbar-collapse" id="navbarNav" th:with="productStatus=${T(com.lucasrodrigues.demo.thymeleaf.enums.ProductStatus)}">
-				      <ul class="navbar-nav">
-				        <li class="nav-item">
-				          <a th:text="${#strings.capitalize('__#{all}__')}" th:classappend="${status} == null ? 'active'" class="nav-link" aria-current="page" th:href="@{/home}">Todos</a>
-				        </li>
-				         <li class="nav-item">
-				          <a th:text="${#strings.capitalize('__#{wanted}__')}" th:classappend="${status} == ${productStatus.WANTED}  ? 'active'" class="nav-link"  th:href="@{'/home/status/'+${productStatus.WANTED.name().toLowerCase()}}">Desejados</a>
-				        </li>
-				        <li class="nav-item">
-				          <a th:text="${#strings.capitalize('__#{waiting-approval}__')}" th:classappend="${status} == ${productStatus.WAITING_APPROVAL} ? 'active'"  class="nav-link"  th:href="@{'/home/status/'+${productStatus.WAITING_APPROVAL.name().toLowerCase()}}">Aguardando aprovação</a>
-				        </li>
-				        <li class="nav-item">
-				          <a th:text="${#strings.capitalize('__#{purchased}__')}"class="nav-link" th:classappend="${status} == ${productStatus.PURCHASED} ? 'active'"  th:href="@{'/home/status/'+${productStatus.PURCHASED.name().toLowerCase()}}">Comprados</a>
-				        </li>
-				      </ul>
+			  <div class="row w-100">
+				   	<div class="col-12 col-sm-10">
+					    <div class="collapse navbar-collapse" id="navbarNav" th:with="productStatus=${T(com.lucasrodrigues.demo.thymeleaf.enums.ProductStatus)}">
+					      <ul class="navbar-nav">
+					        <li class="nav-item">
+					          <a th:text="${#strings.capitalize('__#{all}__')}" th:classappend="${status} == null ? 'active'" class="nav-link" aria-current="page" th:href="@{/user/products}">Todos</a>
+					        </li>
+					         <li class="nav-item">
+					          <a th:text="${#strings.capitalize('__#{wanted}__')}" th:classappend="${status} == ${productStatus.WANTED}  ? 'active'" class="nav-link"  th:href="@{'/user/products/status/'+${productStatus.WANTED.name().toLowerCase()}}">Desejados</a>
+					        </li>
+					        <li class="nav-item">
+					          <a th:text="${#strings.capitalize('__#{waiting-approval}__')}" th:classappend="${status} == ${productStatus.WAITING_APPROVAL} ? 'active'"  class="nav-link"  th:href="@{'/user/products/status/'+${productStatus.WAITING_APPROVAL.name().toLowerCase()}}">Aguardando aprovação</a>
+					        </li>
+					        <li class="nav-item">
+					          <a th:text="${#strings.capitalize('__#{purchased}__')}"class="nav-link" th:classappend="${status} == ${productStatus.PURCHASED} ? 'active'"  th:href="@{'/user/products/status/'+${productStatus.PURCHASED.name().toLowerCase()}}">Comprados</a>
+					        </li>
+					        <li class="nav-item">
+					          <a th:text="${#strings.capitalize('__#{delivered}__')}"class="nav-link" th:classappend="${status} == ${productStatus.DELIVERED} ? 'active'"  th:href="@{'/user/products/status/'+${productStatus.DELIVERED.name().toLowerCase()}}">Entregues</a>
+					        </li>
+					      </ul>
+					    </div>
 				    </div>
-			    </div>
-			    <div class="col-12 col-sm-2  justify-content-end d-flex">
-			     	<a th:href="@{/products/create}"><button th:text="${#strings.capitalize('__#{new}__')}" class="btn btn-outline-secondary" >Novo</button></a>
+				    <div class="col-12 col-sm-2  justify-content-end d-flex">
+				     	<a th:href="@{/products/create}"><button th:text="${#strings.capitalize('__#{new}__')}" class="btn btn-outline-secondary" >Novo</button></a>
+				  	</div>
 			  	</div>
-		  	</div>
 		  </div>
 		</nav>
 	</th:block>
@@ -43,6 +46,7 @@
 		 	<div th:case="${T(com.lucasrodrigues.demo.thymeleaf.enums.ProductStatus).WANTED.name()}" class="card-header alert-dark"><label th:text="${product.name}">Nome do produto</label></div>
 		 	<div th:case="${T(com.lucasrodrigues.demo.thymeleaf.enums.ProductStatus).PURCHASED.name()}" class="card-header alert-success"><label th:text="${product.name}">Nome do produto</label></div>
 		 	<div th:case="${T(com.lucasrodrigues.demo.thymeleaf.enums.ProductStatus).WAITING_APPROVAL.name()}"class="alert-warning card-header"><label th:text="${product.name}">Nome do produto</label></div>
+		 	<div th:case="${T(com.lucasrodrigues.demo.thymeleaf.enums.ProductStatus).DELIVERED.name()}" class="card-header alert-default"><label th:text="${product.name}">Nome do produto</label></div>
 		 </th:block>	
 		 	<div class="card-body">
 		 		<div class="row">
@@ -75,8 +79,8 @@
 			</div>
 		</div>
 	</th:block>
-	<th:block th:fragment="form" th:if="${product}">
-		 <div class="card mt-3">
+	<th:block  th:fragment="form" th:if="${product}">
+		 <div sec:authorize="isAuthenticated()" class="card mt-3">
 		 	<div class="card-body ">
 				<form th:object="${productDTO}" class="row p-3 needs-validation" novalidate  method="post" th:action="@{/products/save}">
 					<div class="form-group mb-3 row">

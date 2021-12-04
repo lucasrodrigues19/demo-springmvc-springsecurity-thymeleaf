@@ -9,17 +9,22 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import com.lucasrodrigues.demo.thymeleaf.domains.Product;
 import com.lucasrodrigues.demo.thymeleaf.domains.Users;
+import com.lucasrodrigues.demo.thymeleaf.enums.ProductStatus;
 import com.lucasrodrigues.demo.thymeleaf.repository.UsersRepository;
 import com.lucasrodrigues.demo.thymeleaf.scurity.config.EncoderConfig;
 
 import lombok.AllArgsConstructor;
 
-@AllArgsConstructor(onConstructor = @__(@Autowired))
-@Service
+@Service("usersService")
 public class UsersService {
 
-	private final UsersRepository repository;
+	@Autowired
+	private UsersRepository repository;
+	
+	@Autowired
+	private  ProductService productService;
 	
 	public List<Users> findAll(){
 		return repository.findAll();
@@ -45,6 +50,14 @@ public class UsersService {
 		if(entity == null)
 			return;
 		repository.save(entity);
+	}
+	
+	public List<Product> getProductByUserId(String userId){
+		return productService.findByUserId(userId);
+	}
+
+	public List<Product> getProductByStatusAndUserId(ProductStatus productSatus, String userId) {
+		return productService.findByStatusAndUserId(productSatus, userId);
 	}
 
 }
