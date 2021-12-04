@@ -1,6 +1,7 @@
 
 ESTUDAR SOBRE:
 	CRSF
+	cache. (Usar quando os dados demandarem muito processamento)
 
 JPA
 	Insertable diz se é possível inserir novos registros na tabela.
