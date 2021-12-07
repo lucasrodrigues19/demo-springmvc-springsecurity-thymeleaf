@@ -28,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
-		.antMatchers("/home","/resources/**", "/static/**","/webjars/**","/h2-console/**").permitAll()
+		.antMatchers("/api/**","/home","/resources/**", "/static/**","/webjars/**","/h2-console/**").permitAll()
 		.anyRequest().authenticated()
 		.and()
 		.formLogin(form -> form.loginPage("/login").defaultSuccessUrl("/user/products", true).permitAll())

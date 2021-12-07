@@ -1,6 +1,12 @@
+
+
+
+# 07/12/2021 Lucas Rodrigues [1.7.3]
+##ADDED rest api products
+
+
 # 04/12/2021 Lucas Rodrigues [1.6.3]
 ##ADDED enable cache
-
 
 # 04/12/2021 Lucas Rodrigues [1.5.3]
 ##ADDED working pageable
