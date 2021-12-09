@@ -1,5 +1,6 @@
 
-
+# 09/12/2021 Lucas Rodrigues [1.8.3]
+##ADDED vue js
 
 # 07/12/2021 Lucas Rodrigues [1.7.3]
 ##ADDED rest api products

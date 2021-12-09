@@ -58,10 +58,13 @@ SEGURANÇA:
 		https://www.baeldung.com/spring_redirect_after_login
 		
 ERROS		
-@AllArgsConstructor(onConstructor = @__(@Autowired))
-UsersService
+	@AllArgsConstructor(onConstructor = @__(@Autowired))
+	UsersService
+		ProductService
 	ProductService
-ProductService
-	UsersService		
-	https://stackoverflow.com/questions/40695893/spring-security-circular-bean-dependency
+		UsersService		
+		https://stackoverflow.com/questions/40695893/spring-security-circular-bean-dependency
+	
+VUE JS:
+	https://vuejs.org
 

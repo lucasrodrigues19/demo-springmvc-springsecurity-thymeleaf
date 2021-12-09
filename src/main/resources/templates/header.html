@@ -27,21 +27,24 @@
 					  <div class="collapse navbar-collapse">
 							<ul class="navbar-nav ">
 						        <li class="nav-item">
-						          <a th:text="${#strings.capitalize('__#{home}__')}" class="color-white nav-link" aria-current="page" th:href="@{/home}"></a>
+						          <a th:text="${#strings.capitalize('__#{home}__')}" class="fw-bold color-white nav-link" aria-current="page" th:href="@{/home}"></a>
 						        </li>
 						         <li class="nav-item">
-						          <a th:text="${#strings.capitalize('__#{user}__')}" class="color-white nav-link"  th:href="@{/user/products}"></a>
+						          <a th:text="${#strings.capitalize('__#{user}__')}" class="fw-bold color-white nav-link"  th:href="@{/user/products}"></a>
+						        </li>
+						        <li class="nav-item">
+						          <a th:text="${#strings.capitalize('__#{offers}__')}" class="fw-bold color-white nav-link"  th:href="@{/offers}"></a>
 						        </li>
 					        </ul>
 				        </div>
 					</div>
 					<div class="col-6 justify-content-end d-flex">
-						<label class="text-uppercase color-white">demo-thymeleaf</label>
+						<label class="fw-bold text-uppercase color-white">demo-thymeleaf</label>
 					</div>
 				</div>
 			</div>
 			<div  sec:authorize="!isAuthenticated()" class="container-fluid justify-content-center">
-				<label class="text-uppercase color-white">demo-thymeleaf</label>
+				<label class="fw-bold text-uppercase color-white">demo-thymeleaf</label>
 			</div>
 		</nav>
 	</th:block>	

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="~{layout}">
+   <div layout:fragment="content">
+		<th:block th:include="~{/fragments/fragment-product :: header(${#strings.capitalize('__#{offers}__')})}"></th:block>
+		<div id="listProducts">
+		 <div v-for="product in listProducts" class="card mb-3">	
+		 	<div v-if="product.status === 'WANTED'" class="card-header alert-dark"><label>{{ product.name }}</label></div>
+		 	<div v-else-if="product.status === 'PURCHASED'" class="card-header alert-success"><label>{{ product.name }}</label></div>
+		 	<div v-else-if="product.status === 'WAITING_APPROVAL'"class="alert-warning card-header"><label>{{ product.name }}</label></div>
+		 	<div v-else-if="product.status === 'DELIVERED'" class="card-header alert-default"><label >{{ product.name }}</label></div>
+		 	<div class="card-body">
+		 		<div class="row">
+					<div class="col-12 col-sm-4">
+						<label>Valor:</label>
+						<input type="number" class="form-control" />
+					</div>
+					<div class="col-12 col-sm-4">
+						<label>Data de entrega:</label>
+						<input class="form-control" data-mask="##/##/####" />
+					</div>
+				</div>
+				<div class="row">
+					 <div class="col-12 col-sm-8 mt-3">
+						 <label>Producto</label>
+						 <a v-bind:href="product.urlProduct">{{ product.name }}</a>
+					</div>	 
+					 <div class="col-12 col-sm-8 mt-3">
+						<label >Descrição</label>
+						<div>
+							<textarea class="form-control" >{{product.description}}</textarea>
+						</div>
+					</div>
+					<div class="col-12 col-sm-4">
+						<div>
+							<img class="img-thumbnail" v-bind:src="product.urlImage" />
+						</div>
+					</div>	
+				</div>
+			</div>
+			<div class="card-footer">
+			</div>
+		</div>
+	</div>
+   </div>
+   <th:block layout:fragment="js">
+   		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+   		<script>
+		   	window.onload = (event) => {
+		    	console.log('The page has fully loaded');
+		    	var app = new Vue({
+				  el: '#listProducts',
+				  data: {
+				    listProducts: [
+						    {
+						        "id": "ca4d9155-2bfd-4401-8a3c-1e82ab9ffa2c",
+						        "name": "Mini System LG CL87",
+						        "deliveryDate": "2021-12-03T23:59:00",
+						        "urlImage": "https://shortest.link/1-2L",
+						        "urlProduct": "https://shortest.link/1-2K",
+						        "description": "XBoom USB Bluetooth - 2350W",
+						        "value": 4399.00,
+						        "status": "DELIVERED",
+						        "userId": "lucas",
+						    },
+						    {
+						        "id": "022a82fe-1c0b-498e-aaf8-78609f3fda83",
+						        "name": "Notebook Dell Inspiron i15",
+						        "deliveryDate": "2021-12-02T23:59:00",
+						        "urlImage": "https://shortest.link/1-2H",
+						        "urlProduct": "https://shortest.link/1-1m",
+						        "description": "3501-A50P 15.6 HD 11ª Geração Intel Core i5 8GB 256GB SSD NVIDIA GeForce Windows 10 Preto",
+						        "value": 4399.00,
+						        "status": "DELIVERED",
+						        "userId": "lucas",
+						        
+						    },
+						    {
+						        "id": "7aeccdfe-d9d6-4312-99b7-fb623b252cf5",
+						        "name": "CALOI VELOX ARO 29",
+						        "deliveryDate": "2021-12-01T23:59:00",
+						        "urlImage": "https://shortest.link/1-2F",
+						        "urlProduct": "https://shortest.link/1-2E",
+						        "description": "Aro 29 Alumínio Freio a disco Câmbio Importado 24 marchas - Azul+Preto",
+						        "value": 1099.00,
+						        "status": "DELIVERED",
+						        "userId": "lucas",
+						    }
+						]
+				  }
+				});
+			}
+   		</script>
+   		
+   </th:block>
+</html>
