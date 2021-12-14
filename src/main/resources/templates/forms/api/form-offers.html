@@ -38,7 +38,8 @@
 				</div>
 			</div>
 			<div class="card-footer">
-				<button v-on:click="sendOffers(product)" class="btn btn-secondary mt-2">Enviar</button>
+				<button v-if="product.sendOffers" class="btn btn-success mt-2">Oferta enviada</button>
+				<button v-else v-on:click="sendOffers(product)" class="btn btn-secondary mt-2">Enviar</button>
 			</div>
 		</div>
 	</div>
@@ -55,20 +56,40 @@
 				    listProducts:[]
 				  },
 				   mounted () {
-					    axios
-					      .get('http://localhost:8080/api/products/status/waiting_approval')
+					  this.getOffers()
+				  },
+				  methods: {
+			  	    sendOffers: function(product){
+			  	    	console.log('enviando ofertas: '+product)
+			  	    	axios
+					      .post('http://localhost:8080/api/offers/save',{
+					      		id: product.id,
+					      		value: product.value,
+					      		deliveryDate: product.deliveryDate,
+					      		description: product.description
+					      		
+					      })
 					      .then(response => {
-					        this.listProducts = response.data
+					       // window.location.href = window.location.href
+					       product.sendOffers = true;
 					      })
 					      .catch(error => {
 					        console.log(error)
 					      })
 					      .finally(console.log('finally'))
-				  },
-				  methods: {
-				  	    sendOffers: function(product){
-				  	    	console.log('enviando ofertas: '+product)
-				  	    }
+				  	    },
+				  	     getOffers: function(){
+					  		 axios
+						      .get('http://localhost:8080/api/products/status/waiting_approval')
+						      .then(response => {
+						      	response.data.forEach(product => product.sendOffers = false)
+						        this.listProducts = response.data
+						      })
+						      .catch(error => {
+						        console.log(error)
+						      })
+						      .finally(console.log('finally'))
+					 	 }
 				  }
 				});
 			}

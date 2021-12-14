@@ -1,4 +1,8 @@
 
+# 13/12/2021 Lucas Rodrigues [1.12.3]
+##ADDED 
+ - saving offers
+
 # 13/12/2021 Lucas Rodrigues [1.10.3]
 ##ADDED 
  - endpoint save offers

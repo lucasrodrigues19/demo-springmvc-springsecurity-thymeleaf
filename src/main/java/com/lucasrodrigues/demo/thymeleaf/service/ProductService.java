@@ -50,7 +50,7 @@ public class ProductService {
 		Users users = findByUserById(userName);
 		entity.setUsers(users);
 		
-		if(entity.getUsers() == null || StringUtils.hasLength(entity.getUserId()))
+		if(entity.getUsers() == null && StringUtils.hasLength(entity.getUserId()))
 			throw new RuntimeException("no user associated with the product");
 		return repository.save(entity);
 	}
