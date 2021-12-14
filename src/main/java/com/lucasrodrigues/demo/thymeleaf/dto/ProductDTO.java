@@ -8,6 +8,8 @@ import java.util.UUID;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
+import org.springframework.util.StringUtils;
+
 import com.lucasrodrigues.demo.thymeleaf.domains.Product;
 import com.lucasrodrigues.demo.thymeleaf.domains.Users;
 import com.lucasrodrigues.demo.thymeleaf.enums.ProductStatus;
@@ -21,6 +23,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ProductDTO {
 
+	
+	private UUID id;
+	
+	
 	@NotBlank//Verificar a mensagem padrão para colocar no properties
 	private String name;
 	
@@ -44,7 +50,14 @@ public class ProductDTO {
 	private Users user;
 	
 	public Product toProduct() {
+		return new Product(id, name, getFullDeliveryDate(), urlImage, urlProduct, description, value, status,userId,user);
+	}
+	
+	public LocalDateTime getFullDeliveryDate() {
 		DateTimeFormatter formater = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
-		return new Product(null, name, LocalDateTime.parse(deliveryDate+" 23:59",formater), urlImage, urlProduct, description, value, status,userId,user);
+		if (StringUtils.hasLength(deliveryDate))
+			return LocalDateTime.parse(deliveryDate+" 23:59",formater);
+		else
+			return null;
 	}
 }

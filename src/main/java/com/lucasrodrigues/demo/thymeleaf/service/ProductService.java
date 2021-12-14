@@ -3,6 +3,8 @@ package com.lucasrodrigues.demo.thymeleaf.service;
 import java.util.List;
 import java.util.UUID;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -37,7 +39,8 @@ public class ProductService {
 			repository.saveAll(listToSave);
 	}
 	
-	public void save(Product entity) {
+	@Transactional
+	public Product save(Product entity) {
 		
 		
 		if(entity == null)
@@ -49,7 +52,7 @@ public class ProductService {
 		
 		if(entity.getUsers() == null || StringUtils.hasLength(entity.getUserId()))
 			throw new RuntimeException("no user associated with the product");
-		repository.save(entity);
+		return repository.save(entity);
 	}
 
 	public List<Product> findByStatusAndUserId(ProductStatus productSatus, String userId) {

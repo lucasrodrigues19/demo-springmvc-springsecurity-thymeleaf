@@ -43,19 +43,19 @@ public class ConfigTest implements CommandLineRunner {
 		authoritiesService.save(auth);
 		
 		List<Product> listToSave = new ArrayList<>();
-		listToSave.add(new ProductDTO("Redmi Note 10S Pebble White 8 GB RAM 128 GB ROM","12/12/2021","https://m.media-amazon.com/images/I/511ouQ6FHvL._AC_SL1101_.jpg","https://shortest.link/1JOZ","",new BigDecimal("2000"),ProductStatus.PURCHASED,user1.getUsername(),user1.toUser()).toProduct());	
-		listToSave.add(new ProductDTO("iPhone XR Apple 64GB Branco","30/12/2021","https://www.casasbahia-imagens.com.br/Control/ArquivoExibir.aspx?IdArquivo=1469097804","https://shortest.link/1FqV"," Tela de 6.1”, Câmera de 12MP, iOS",new BigDecimal("3400"),ProductStatus.WAITING_APPROVAL,user1.getUsername(),user1.toUser()).toProduct());	
+		
+		//vendidos
+		listToSave.add(new ProductDTO(null,"Redmi Note 10S Pebble White 8 GB RAM 128 GB ROM","12/12/2021","https://m.media-amazon.com/images/I/511ouQ6FHvL._AC_SL1101_.jpg","https://shortest.link/1JOZ","",new BigDecimal("2000"),ProductStatus.PURCHASED,user1.getUsername(),user1.toUser()).toProduct());	
+		
+		//aguardando aprovação
+		listToSave.add(new ProductDTO(null,"iPhone XR Apple 64GB Branco","","https://www.casasbahia-imagens.com.br/Control/ArquivoExibir.aspx?IdArquivo=1469097804","https://shortest.link/1FqV"," Tela de 6.1”, Câmera de 12MP, iOS",new BigDecimal("3400"),ProductStatus.WAITING_APPROVAL,user1.getUsername(),user1.toUser()).toProduct());	
+		listToSave.add(new ProductDTO(null,"Xiaomi Redmi AirDots 3 Pro","","https://cdn.shopify.com/s/files/1/0590/1231/7365/products/df96cd6542614f9762344b73f1437448.jpg?v=1628864120","encurtador.com.br/krF45"," com Cancelamento de Ruído - Lançamento 2021",new BigDecimal("369.90"),ProductStatus.WAITING_APPROVAL,user1.getUsername(),user1.toUser()).toProduct());	
+		
+		
 		//Produtos entregues
-		listToSave.add(new ProductDTO("CALOI VELOX ARO 29","01/12/2021","https://shortest.link/1-2F","https://shortest.link/1-2E","Aro 29 Alumínio Freio a disco Câmbio Importado 24 marchas - Azul+Preto",new BigDecimal("1099"),ProductStatus.DELIVERED,user1.getUsername(),user1.toUser()).toProduct());	
-		listToSave.add(new ProductDTO("Notebook Dell Inspiron i15","02/12/2021","https://shortest.link/1-2H","https://shortest.link/1-1m","3501-A50P 15.6 HD 11ª Geração Intel Core i5 8GB 256GB SSD NVIDIA GeForce Windows 10 Preto",new BigDecimal("4399"),ProductStatus.DELIVERED,user1.getUsername(),user1.toUser()).toProduct());	
-		listToSave.add(new ProductDTO("Mini System LG CL87","03/12/2021","https://shortest.link/1-2L","https://shortest.link/1-2K","XBoom USB Bluetooth - 2350W",new BigDecimal("4399"),ProductStatus.DELIVERED,user1.getUsername(),user1.toUser()).toProduct());	
-//		listToSave.add(new ProductDTO("Notebook Dell Inspiron i15","01/01/2022","https://m.media-amazon.com/images/I/616PBNK19aL._AC_SL1000_.jpg","https://shortest.link/1-1m","3501-A50P 15.6 HD 11ª Geração Intel Core i5 8GB 256GB SSD NVIDIA GeForce Windows 10 Preto",new BigDecimal("4399"),ProductStatus.DELIVERED,user1.getUsername(),user1.toUser()).toProduct());	
-//		listToSave.add(new ProductDTO("Notebook Dell Inspiron i15","01/01/2022","https://m.media-amazon.com/images/I/616PBNK19aL._AC_SL1000_.jpg","https://shortest.link/1-1m","3501-A50P 15.6 HD 11ª Geração Intel Core i5 8GB 256GB SSD NVIDIA GeForce Windows 10 Preto",new BigDecimal("4399"),ProductStatus.DELIVERED,user1.getUsername(),user1.toUser()).toProduct());	
-//		listToSave.add(new ProductDTO("Notebook Dell Inspiron i15","01/01/2022","https://m.media-amazon.com/images/I/616PBNK19aL._AC_SL1000_.jpg","https://shortest.link/1-1m","3501-A50P 15.6 HD 11ª Geração Intel Core i5 8GB 256GB SSD NVIDIA GeForce Windows 10 Preto",new BigDecimal("4399"),ProductStatus.DELIVERED,user1.getUsername(),user1.toUser()).toProduct());	
-//		listToSave.add(new ProductDTO("Notebook Dell Inspiron i15","01/01/2022","https://m.media-amazon.com/images/I/616PBNK19aL._AC_SL1000_.jpg","https://shortest.link/1-1m","3501-A50P 15.6 HD 11ª Geração Intel Core i5 8GB 256GB SSD NVIDIA GeForce Windows 10 Preto",new BigDecimal("4399"),ProductStatus.DELIVERED,user1.getUsername(),user1.toUser()).toProduct());	
-//		listToSave.add(new ProductDTO("Notebook Dell Inspiron i15","01/01/2022","https://m.media-amazon.com/images/I/616PBNK19aL._AC_SL1000_.jpg","https://shortest.link/1-1m","3501-A50P 15.6 HD 11ª Geração Intel Core i5 8GB 256GB SSD NVIDIA GeForce Windows 10 Preto",new BigDecimal("4399"),ProductStatus.DELIVERED,user1.getUsername(),user1.toUser()).toProduct());	
-//		listToSave.add(new ProductDTO("Notebook Dell Inspiron i15","01/01/2022","https://m.media-amazon.com/images/I/616PBNK19aL._AC_SL1000_.jpg","https://shortest.link/1-1m","3501-A50P 15.6 HD 11ª Geração Intel Core i5 8GB 256GB SSD NVIDIA GeForce Windows 10 Preto",new BigDecimal("4399"),ProductStatus.DELIVERED,user1.getUsername(),user1.toUser()).toProduct());	
-//		listToSave.add(new ProductDTO("Notebook Dell Inspiron i15","01/01/2022","https://m.media-amazon.com/images/I/616PBNK19aL._AC_SL1000_.jpg","https://shortest.link/1-1m","3501-A50P 15.6 HD 11ª Geração Intel Core i5 8GB 256GB SSD NVIDIA GeForce Windows 10 Preto",new BigDecimal("4399"),ProductStatus.DELIVERED,user1.getUsername(),user1.toUser()).toProduct());	
+		listToSave.add(new ProductDTO(null,"CALOI VELOX ARO 29","01/12/2021","https://shortest.link/1-2F","https://shortest.link/1-2E","Aro 29 Alumínio Freio a disco Câmbio Importado 24 marchas - Azul+Preto",new BigDecimal("1099"),ProductStatus.DELIVERED,user1.getUsername(),user1.toUser()).toProduct());	
+		listToSave.add(new ProductDTO(null,"Notebook Dell Inspiron i15","02/12/2021","https://shortest.link/1-2H","https://shortest.link/1-1m","3501-A50P 15.6 HD 11ª Geração Intel Core i5 8GB 256GB SSD NVIDIA GeForce Windows 10 Preto",new BigDecimal("4399"),ProductStatus.DELIVERED,user1.getUsername(),user1.toUser()).toProduct());	
+		listToSave.add(new ProductDTO(null,"Mini System LG CL87","03/12/2021","https://shortest.link/1-2L","https://shortest.link/1-2K","XBoom USB Bluetooth - 2350W",new BigDecimal("4399"),ProductStatus.DELIVERED,user1.getUsername(),user1.toUser()).toProduct());	
 
 		
 		productService.saveAll(listToSave);

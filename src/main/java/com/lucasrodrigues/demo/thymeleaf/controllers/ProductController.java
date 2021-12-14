@@ -38,6 +38,6 @@ public class ProductController {
 		
 		productService.save(productDTO.toProduct());
 		model.addAttribute("listProduct",productService.findAll());
-		return "redirect:/home";
+		return "redirect:/user/products";
 	}
 }

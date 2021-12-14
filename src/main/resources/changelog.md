@@ -1,4 +1,9 @@
 
+# 13/12/2021 Lucas Rodrigues [1.10.3]
+##ADDED 
+ - endpoint save offers
+ - getting  products data with js(vue.js)
+
 # 09/12/2021 Lucas Rodrigues [1.9.3]
 ##ADDED aixos lib
 
